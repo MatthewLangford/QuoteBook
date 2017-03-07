@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="quoteApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body ng-controller="quoteController">
+<input  placeholder="quote" ng-model="quoteText" type="text"><br/>
+    <input placeholder="author" ng-model="author" type="text"><br/>
+
+    <button ng-click="addQuote(quoteText, author)">Click to add new quote</button>
+    <select ng-model="sortProp">
+        <option ng-repeat="opt in options">{{opt}}</option>
+    </select>
+    <div class="wrap">
+    <div ng-repeat="quote in currentQuotes | orderBy: sortProp " class="quote">
+        " {{quote.text}}" <span class="auth">{{quote.author}}</span>
+        <button ng-click="removeQuote($index)" class="removeButton">X</button>
+        <button ng-click="save($index, {text: quote.text, author: quote.author})" class="save">save quote</button>
+    </div>
+    </div>
+
+<script src="js/angular.js"></script>
+<script src="js/app.js"></script>
+<script src="js/control.js"></script>
+    <script src="js/quoteService.js"></script>
+</body>
+</html>
